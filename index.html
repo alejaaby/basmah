@@ -16,6 +16,17 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
         }
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1e3a8a;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="min-h-screen bg-slate-50">
@@ -36,128 +47,98 @@
 
         <!-- Attendance Section -->
         <div id="attendance" class="tab-content active glass-morphism p-8 rounded-3xl">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <span class="ml-2">🕒</span> تسجيل الحضور
-            </h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">🕒 تسجيل الحضور</h2>
             <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">رقم الموظف</label>
-                    <input type="text" id="att_emp_id" placeholder="أدخل رقمك الوظيفي" class="w-full p-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <button onclick="submitLog('حضور')" id="btn_att" class="w-full bg-green-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-green-700 transition shadow-lg">إثبات حضور الآن</button>
+                <input type="text" id="att_emp_id" placeholder="أدخل رقمك الوظيفي" class="w-full p-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-center text-xl">
+                <button onclick="submitLog('حضور')" id="btn_att" class="w-full bg-green-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-green-700 transition shadow-lg">إثبات حضور</button>
             </div>
         </div>
 
         <!-- Departure Section -->
         <div id="departure" class="tab-content glass-morphism p-8 rounded-3xl">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <span class="ml-2">🚶</span> تسجيل الانصراف
-            </h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">🚶 تسجيل الانصراف</h2>
             <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">رقم الموظف</label>
-                    <input type="text" id="dep_emp_id" placeholder="أدخل رقمك الوظيفي" class="w-full p-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <button onclick="submitLog('انصراف')" id="btn_dep" class="w-full bg-red-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-red-700 transition shadow-lg">إثبات انصراف الآن</button>
+                <input type="text" id="dep_emp_id" placeholder="أدخل رقمك الوظيفي" class="w-full p-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-center text-xl">
+                <button onclick="submitLog('انصراف')" id="btn_dep" class="w-full bg-red-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-red-700 transition shadow-lg">إثبات انصراف</button>
             </div>
         </div>
 
         <!-- Registration Section -->
         <div id="register" class="tab-content glass-morphism p-8 rounded-3xl">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <span class="ml-2">👤</span> إضافة موظف للمؤسسة
-            </h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">👤 إضافة موظف جديد</h2>
             <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">اسم الموظف</label>
-                    <input type="text" id="reg_name" placeholder="الاسم الكامل" class="w-full p-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">الرقم الوظيفي المقترح</label>
-                    <input type="text" id="reg_id" placeholder="مثال: 1001" class="w-full p-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">القسم</label>
-                    <select id="reg_dept" class="w-full p-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none">
-                        <option>الذكاء الاصطناعي</option>
-                        <option>تطوير البرمجيات</option>
-                        <option>الإدارة</option>
-                        <option>الأمن السيبراني</option>
-                    </select>
-                </div>
-                <button onclick="registerEmployee()" id="btn_reg" class="w-full bg-blue-900 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-800 transition shadow-lg">حفظ بيانات الموظف</button>
+                <input type="text" id="reg_name" placeholder="الاسم الكامل للموظف" class="w-full p-4 border border-gray-300 rounded-2xl outline-none">
+                <input type="text" id="reg_id" placeholder="الرقم الوظيفي" class="w-full p-4 border border-gray-300 rounded-2xl outline-none">
+                <select id="reg_dept" class="w-full p-4 border border-gray-300 rounded-2xl outline-none">
+                    <option>الذكاء الاصطناعي</option>
+                    <option>تطوير البرمجيات</option>
+                    <option>الإدارة</option>
+                </select>
+                <button onclick="registerEmployee()" id="btn_reg" class="w-full bg-blue-900 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-800 transition shadow-lg">حفظ البيانات</button>
             </div>
         </div>
 
         <!-- Feedback Modal -->
-        <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
-            <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl">
-                <div id="modal-icon" class="text-5xl mb-4"></div>
-                <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
-                <p id="modal-msg" class="text-gray-600 mb-6"></p>
-                <button onclick="closeModal()" class="w-full bg-blue-900 text-white py-3 rounded-xl font-bold">حسناً</button>
+        <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center p-4 z-50 backdrop-blur-sm">
+            <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl scale-in">
+                <div id="modal-icon" class="text-6xl mb-4"></div>
+                <h3 id="modal-title" class="text-2xl font-bold mb-2 text-gray-800"></h3>
+                <div id="modal-msg" class="text-gray-600 mb-6 leading-relaxed"></div>
+                <button onclick="closeModal()" class="w-full bg-blue-900 text-white py-3 rounded-xl font-bold shadow-md hover:bg-blue-800 transition">فهمت</button>
             </div>
         </div>
     </div>
 
     <script>
-        // الرابط الذي قمت بتزويدي به
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXk1xHKVMwCZ_AJB0FzRyXEI5PQKo-0kQ9KUoMAdM_NhpMbooqyTgwCO702o2QfTPQ/exec';
         const ADMIN_PASSWORD = '123123';
 
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-900', 'text-white');
-                btn.classList.add('bg-white', 'text-blue-900');
+                btn.classList.replace('bg-blue-900', 'bg-white');
+                btn.classList.replace('text-white', 'text-blue-900');
             });
-            event.currentTarget.classList.add('bg-blue-900', 'text-white');
-            event.currentTarget.classList.remove('bg-white', 'text-blue-900');
+            event.currentTarget.classList.replace('bg-white', 'bg-blue-900');
+            event.currentTarget.classList.replace('text-blue-900', 'text-white');
         }
 
         function checkAdminAccess() {
-            const pass = prompt("الرجاء إدخال الرقم السري للوصول لقسم الإدارة:");
-            if (pass === ADMIN_PASSWORD) {
-                showTab('register');
-            } else {
-                showModal('❌', 'عذراً!', 'الرقم السري غير صحيح');
-            }
+            const pass = prompt("الرقم السري للإدارة:");
+            if (pass === ADMIN_PASSWORD) showTab('register');
+            else showModal('❌', 'تنبيه الأمان', 'الرقم السري الذي أدخلته غير صحيح!');
         }
 
         async function submitLog(type) {
-            const empIdField = type === 'حضور' ? 'att_emp_id' : 'dep_emp_id';
-            const btnId = type === 'حضور' ? 'btn_att' : 'btn_dep';
-            const empId = document.getElementById(empIdField).value;
+            const fieldId = type === 'حضور' ? 'att_emp_id' : 'dep_emp_id';
+            const empId = document.getElementById(fieldId).value;
+            const btn = document.getElementById(type === 'حضور' ? 'btn_att' : 'btn_dep');
 
-            if (!empId) {
-                showModal('⚠️', 'تنبيه', 'يرجى إدخال رقم الموظف');
-                return;
-            }
+            if (!empId) return showModal('⚠️', 'نقص بيانات', 'يرجى كتابة الرقم الوظيفي أولاً');
 
-            toggleLoading(btnId, true);
+            toggleLoading(btn, true);
 
             try {
-                // إرسال البيانات باستخدام fetch
-                await fetch(SCRIPT_URL, {
+                // إرسال الطلب واستقبال النتيجة
+                const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
-                    cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: 'log',
-                        type: type,
-                        empId: empId
-                    })
+                    body: JSON.stringify({ action: 'log', type: type, empId: empId })
                 });
+                
+                const res = await response.json();
 
-                showModal('✅', 'تمت العملية', `تم تسجيل ${type} الموظف بنجاح.`);
-                document.getElementById(empIdField).value = '';
-            } catch (error) {
-                showModal('❌', 'خطأ', 'حدثت مشكلة أثناء الاتصال بقاعدة البيانات');
+                if (res.result === 'success') {
+                    showModal('👋', `أهلاً ${res.name}`, 
+                        `تم تسجيل <b>${res.type}</b> بنجاح.<br><small class="text-blue-500">الوقت: ${res.time}</small>`);
+                    document.getElementById(fieldId).value = '';
+                } else {
+                    showModal('🚫', 'عذراً!', res.message);
+                }
+            } catch (e) {
+                showModal('📡', 'خطأ اتصال', 'تأكد من اتصالك بالإنترنت وحاول مرة أخرى');
             } finally {
-                toggleLoading(btnId, false);
+                toggleLoading(btn, false);
             }
         }
 
@@ -165,60 +146,48 @@
             const name = document.getElementById('reg_name').value;
             const id = document.getElementById('reg_id').value;
             const dept = document.getElementById('reg_dept').value;
+            const btn = document.getElementById('btn_reg');
 
-            if (!name || !id) {
-                showModal('⚠️', 'تنبيه', 'يرجى إكمال كافة البيانات');
-                return;
-            }
+            if (!name || !id) return showModal('⚠️', 'نقص بيانات', 'جميع الحقول مطلوبة');
 
-            toggleLoading('btn_reg', true);
+            toggleLoading(btn, true);
 
             try {
-                await fetch(SCRIPT_URL, {
+                const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
-                    cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: 'register',
-                        name: name,
-                        empId: id,
-                        department: dept
-                    })
+                    body: JSON.stringify({ action: 'register', name: name, empId: id, department: dept })
                 });
-
-                showModal('👤', 'تم التسجيل', `تمت إضافة الموظف ${name} لقاعدة البيانات.`);
-                document.getElementById('reg_name').value = '';
-                document.getElementById('reg_id').value = '';
-            } catch (error) {
-                showModal('❌', 'خطأ', 'فشل في حفظ البيانات');
+                const res = await response.json();
+                
+                if (res.result === 'success') {
+                    showModal('✅', 'تم الحفظ', `تمت إضافة الموظف <b>${name}</b> بنجاح.`);
+                    document.getElementById('reg_name').value = '';
+                    document.getElementById('reg_id').value = '';
+                }
+            } catch (e) {
+                showModal('❌', 'فشل الحفظ', 'حدث خطأ أثناء الاتصال بالسيرفر');
             } finally {
-                toggleLoading('btn_reg', false);
+                toggleLoading(btn, false);
             }
         }
 
         function showModal(icon, title, msg) {
             document.getElementById('modal-icon').innerText = icon;
             document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-msg').innerText = msg;
+            document.getElementById('modal-msg').innerHTML = msg;
             document.getElementById('modal').classList.remove('hidden');
         }
 
-        function closeModal() {
-            document.getElementById('modal').classList.add('hidden');
-        }
+        function closeModal() { document.getElementById('modal').classList.add('hidden'); }
 
-        function toggleLoading(btnId, isLoading) {
-            const btn = document.getElementById(btnId);
+        function toggleLoading(btn, isLoading) {
             if (isLoading) {
                 btn.disabled = true;
-                btn.dataset.originalText = btn.innerText;
-                btn.innerText = 'جاري المعالجة...';
-                btn.classList.add('opacity-50');
+                btn.dataset.oldText = btn.innerHTML;
+                btn.innerHTML = `<span class="loading-spinner"></span> جاري التحقق...`;
             } else {
                 btn.disabled = false;
-                btn.innerText = btn.dataset.originalText;
-                btn.classList.remove('opacity-50');
+                btn.innerHTML = btn.dataset.oldText;
             }
         }
     </script>
